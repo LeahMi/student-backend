@@ -2,7 +2,7 @@
 
 This is the core REST API for the Student & Course Management System. The project is built using **Spring Boot** and provides a robust backend service for the Angular frontend.
 
-## 🛠 Tech Stack
+## Tech Stack
 - **Java 17+**
 - **Spring Boot 3.4+**
 - **Spring Data JPA** (Database management)
