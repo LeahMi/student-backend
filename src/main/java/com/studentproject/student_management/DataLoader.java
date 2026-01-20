@@ -21,7 +21,6 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // יצירת סטודנט לבדיקה
         Student s = new Student();
         s.setId("207919341");
         s.setPassword("pass123");
@@ -30,7 +29,6 @@ public class DataLoader implements CommandLineRunner {
         s.setEmail("test@test.com");
         studentRepository.save(s);
 
-        // יצירת קורסים לבדיקה
         Course c1 = new Course();
         c1.setCourseId(101L);
         c1.setCourseName("Java Programming");

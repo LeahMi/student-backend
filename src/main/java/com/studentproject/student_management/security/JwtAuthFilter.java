@@ -26,10 +26,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            String studentId = jwtService.extractStudentId(token); // נצטרך להוסיף פונקציה זו ב-JwtService
+            String studentId = jwtService.extractStudentId(token);
 
             if (studentId != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                // אם הטוקן תקין, אנחנו "מכניסים" את המשתמש למערכת
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(studentId, null, new ArrayList<>());
                 SecurityContextHolder.getContext().setAuthentication(authToken);

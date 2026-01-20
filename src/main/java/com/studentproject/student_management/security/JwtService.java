@@ -8,7 +8,6 @@ import java.util.Date;
 
 @Service
 public class JwtService {
-    // מפתח סודי (במציאות שומרים אותו ב-Environment Variables)
     private final String SECRET = "mySecretKey123456789012345678901234567890";
     private final SecretKey KEY = Keys.hmacShaKeyFor(SECRET.getBytes());
 
@@ -30,7 +29,7 @@ public class JwtService {
                     .getPayload()
                     .getSubject();
         } catch (Exception e) {
-            return null; // טוקן לא תקין או פג תוקף
+            return null;
         }
     }
 }

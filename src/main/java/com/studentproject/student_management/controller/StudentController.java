@@ -19,13 +19,11 @@ public class StudentController {
     @Autowired
     private StudentCourseRepository studentCourseRepository;
 
-    // עדכון פרטי סטודנט
     @PutMapping("/update")
     public Student updateStudent(@RequestBody Student student) {
         return studentRepository.save(student);
     }
 
-    // קבלת רשימת הקורסים של סטודנט ספציפי
     @GetMapping("/{id}/courses")
     public List<StudentCourseDTO> getMyCourses(@PathVariable String id) {
         return studentCourseRepository.findCoursesByStudentId(id);

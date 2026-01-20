@@ -28,7 +28,6 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
-                // עדכון הגדרת ה-CORS לשימוש ב-Bean שהגדרנו למטה
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
@@ -40,7 +39,6 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // הגדרה מפורשת של CORS כדי למנוע 403 בבקשות PUT/DELETE
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

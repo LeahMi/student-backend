@@ -5,7 +5,7 @@ import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
-@Data // זה בזכות ה-Lombok, חוסך כתיבת Getters ו-Setters
+@Data
 public class Student {
     @Id
     private String id;

@@ -22,7 +22,6 @@ public class CourseController {
     @Autowired
     private StudentCourseRepository studentCourseRepository;
 
-    // חיפוש קורסים
     @GetMapping("/search")
     public List<Course> search(@RequestParam String name) {
         return courseRepository.findByCourseNameContainingIgnoreCase(name);
@@ -30,14 +29,14 @@ public class CourseController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody StudentCourse registration) {
-        // בדיקה אם כבר רשום
+
         if (studentCourseRepository.existsByStudentIdAndCourseId(registration.getStudentId(), registration.getCourseId())) {
             return ResponseEntity.status(400).body("{\"message\": \"כבר רשום לקורס\"}");
         }
 
         registration.setRegistrationDate(LocalDate.now());
         StudentCourse saved = studentCourseRepository.save(registration);
-        return ResponseEntity.ok(saved); // מחזיר את האובייקט שנשמר כ-JSON
+        return ResponseEntity.ok(saved);
     }
 
 

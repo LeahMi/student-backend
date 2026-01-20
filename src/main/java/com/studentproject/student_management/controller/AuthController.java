@@ -24,7 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Student loginDetails) {
-        // 1. חיפוש סטודנט לפי ת"ז בלבד
+
         Optional<Student> studentOpt = studentRepository.findById(loginDetails.getId());
 
         if (studentOpt.isEmpty()) {
@@ -33,12 +33,10 @@ public class AuthController {
 
         Student student = studentOpt.get();
 
-        // 2. בדיקת סיסמה
         if (!student.getPassword().equals(loginDetails.getPassword())) {
             return ResponseEntity.status(401).body("{\"message\": \"סיסמה שגויה, נסה שנית\"}");
         }
 
-        // 3. אם הכל תקין - יצירת טוקן
         String token = jwtService.generateToken(student.getId());
         Map<String, Object> response = new HashMap<>();
         response.put("student", student);
