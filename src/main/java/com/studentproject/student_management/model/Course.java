@@ -1,10 +1,10 @@
 package com.studentproject.student_management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Data
@@ -16,13 +16,7 @@ public class Course {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    @Data
-    @AllArgsConstructor
-    public static class StudentCourseDTO {
-        private Long courseId;
-        private String courseName;
-        private Integer grade;
-        private LocalDate startDate;
-        private LocalDate endDate;
-    }
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<StudentCourse> registrations;
 }

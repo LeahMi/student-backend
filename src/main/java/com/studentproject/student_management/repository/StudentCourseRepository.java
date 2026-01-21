@@ -11,16 +11,15 @@ import java.util.List;
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourse, Long> {
 
-    boolean existsByStudentIdAndCourseId(String studentId, Long courseId);
-
+    boolean existsByStudentIdAndCourseCourseId(String studentId, Long courseId);
     @Transactional
     @Modifying
-    void deleteByStudentIdAndCourseId(String studentId, Long courseId);
+    @Query("DELETE FROM StudentCourse sc WHERE sc.student.id = :studentId AND sc.course.courseId = :courseId")
+    void deleteByStudentIdAndCourseId(@Param("studentId") String studentId, @Param("courseId") Long courseId);
 
     @Query("SELECT new com.studentproject.student_management.model.StudentCourseDTO(" +
-            "c.courseId, c.courseName, sc.grade, c.startDate, c.endDate) " +
+            "sc.course.courseId, sc.course.courseName, sc.grade, sc.course.startDate, sc.course.endDate) " +
             "FROM StudentCourse sc " +
-            "JOIN Course c ON sc.courseId = c.courseId " +
-            "WHERE sc.studentId = :studentId")
+            "WHERE sc.student.id = :studentId")
     List<StudentCourseDTO> findCoursesByStudentId(@Param("studentId") String studentId);
 }
